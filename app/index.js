@@ -1,7 +1,9 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from 'react';
-import { head } from "superagent";
+import 'react-native-get-random-values'
+import { v4 as uuidv4 } from "uuid";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // {`${myFunction()}`}
 
@@ -10,29 +12,6 @@ var apiCli = new AgentworkbenchRestApi.ApiClient();
 var api = new AgentworkbenchRestApi.AdminsApi(apiCli); // Allocate the API class we're going to use.
 
 
-
-/*function myFunction() {
-  const [osFamilly, setOsFamilly] = useState('');
-  //test = test + ' Das ist neu';
-  var apiCli = new AgentworkbenchRestApi.ApiClient();
-  var api = new AgentworkbenchRestApi.AdminsApi(apiCli); // Allocate the API class we're going to use.
-
-  var sys = api.infoGet(display);
-  console.log(typeof (sys));
-  return sys;
-}*/
-
-/*function display(error, data, response) {
-
-  console.log(data);
-  console.log(data.osFamilly);
-  var text = data.osFamilly;
-  console.log(typeof (text));
-  console.log(text);
-  osFam = data.osFamilly;
-  console.log(osFam);
-
-}*/
 
 export default function Page() {
   const router = useRouter();
@@ -48,8 +27,29 @@ export default function Page() {
   const [swapMemoryTotalInGB, setSwapMemoryTotalInGB] = useState('');
 
   useEffect(() => {
+    const sessionId = getSessionId();
+    console.log(sessionId);
     api.infoGet(display);
   }, []);
+
+  const getSessionId = async () => {
+    try {
+      // Versuche die Sitzungs-ID aus dem Speicher zu laden
+      const sessionId = await AsyncStorage.getItem('session_id');
+      if (sessionId === null) {
+        // Wenn es keine gespeicherte Sitzungs-ID gibt, erzeuge eine neue
+        const newSessionId = uuidv4();
+        await AsyncStorage.setItem('session_id', newSessionId);
+        return newSessionId;
+      }
+      return sessionId;
+    } catch (e) {
+      // Behandle den Fehler hier
+      console.error(e);
+    }
+  };
+
+
 
   function display(error, data, response) {
     console.log(data);

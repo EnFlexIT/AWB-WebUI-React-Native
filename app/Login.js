@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Image } from 'react-native';
 import { useRouter } from "expo-router"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
 import { AntDesign } from '@expo/vector-icons';
 import Logo from './assets/images/AWB_Icon.png';
@@ -22,6 +23,15 @@ const LoginForm = () => {
     setPassword(text);
   };
 
+  const storeData = async () => {
+    try {
+      await AsyncStorage.setItem('Username', username);
+    } catch (e) {
+      // saving error
+    }
+    console.log('Daten saved')
+  };
+
   const handleLogin = () => {
 
 
@@ -29,12 +39,14 @@ const LoginForm = () => {
     const storedPassword = sessionStorage.getItem('password')
 
     if (username === storedUsername && password === storedPassword) {
+      storeData();
       console.log('Erfolgreich eingeloggt');
-      router.push("/Kontakt");
+      router.push("/testApicall");
 
     } else {
       console.log('Falscher Benutzername oder Passwort');
     }
+
   };
 
   const handleRegister = () => {

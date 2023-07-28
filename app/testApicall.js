@@ -1,67 +1,85 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TextInput, Button, Image, Text, StyleSheet } from 'react-native';
+import { useRouter } from "expo-router"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const infoURL = "http://localhost:8080/api/info"
 
-export default function App() {
-    const [data, setData] = useState([]);
-    const [title, setTitle] = useState([]);
-    const [body, setBody] = useState([]);
+const testApicall = () => {
+
+    const [username, setUsername] = useState('');
+    const [vorname, setVorname] = useState('');
+    const [nachname, setNachname] = useState('');
+    const [email, setEmail] = useState('');
+
+
+    const router = useRouter();
 
     useEffect(() => {
-        fetch(infoURL)
-            .then((resp) => resp.json())
-            .then((json) => {
-                setData(json)
-
-            })
-            .catch((error) => console.error(error))
+        load();
     }, []);
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.head} >Movie List</Text>
-            <Text style={styles.einleitung}>Folgend eine Liste aus einem API Endpoint:</Text>
-            <View style={{ borderBottomWidth: 10, marginBottom: 15 }}></View>
-            <FlatList
-                data={data}
-                keyExtractor={({ id }, index) => id}
-                renderItem={({ item }) => (
-                    <View>
+    const load = async () => {
+        try {
+            let name = await AsyncStorage.getItem('Username')
 
-                        <Text style={styles.body}>{item.body}</Text>
-                        <View style={{ borderBottomWidth: 2, marginBottom: 15 }}></View>
-                    </View>
-                )}
-            />
-            <StatusBar style="auto" />
+            if (name != null) {
+                setUsername(name);
+            }
+        } catch (e) {
+            // read error
+        }
+
+        console.log('Done.')
+    }
+
+
+
+    return (
+
+        <View style={styles.container}>
+            <Text style={styles.text}>Hi {username}</Text>
+            <View style={styles.profileInfo}>
+                <Text style={styles.infoLabel}>Vorname:</Text>
+                <Text style={styles.infoValue}>{vorname}</Text>
+            </View>
+            <View style={styles.profileInfo}>
+                <Text style={styles.infoLabel}>Nachname:</Text>
+                <Text style={styles.infoValue}>{nachname}</Text>
+            </View>
+            <View style={styles.profileInfo}>
+                <Text style={styles.infoLabel}>E-Mail Adresse:</Text>
+                <Text style={styles.infoValue}>{email}</Text>
+            </View>
         </View>
+
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
-        flex: 2,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'top',
+        flex: 1,
+        alignItems: "center",
+        padding: 10,
     },
-    head: {
-        fontSize: 150
+    text: {
+        fontSize: 30,
+        fontWeight: "bold",
+        fontStyle: 'normal',
 
     },
-    einleitung: {
-        fontSize: 40
-
+    profileInfo: {
+        flexDirection: 'row',
+        marginBottom: 10,
     },
-    title: {
-        fontSize: 20,
-        fontWeight: "500",
-        padding: 5
-    },
-    body: {
-        fontSize: 15
+    infoLabel: {
 
-    }
+        marginRight: 10,
+        fontSize: 30,
+    },
+    infoValue: {
+        fontSize: 16,
+    },
 });
+
+
+export default testApicall;

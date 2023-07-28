@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
 
 
@@ -52,7 +53,7 @@ const KontaktForm = () => {
       })
       .catch((error) => {
         console.log('Fehler beim Übermitteln der Daten:', error);
-      }); 
+      });
   };
 
   return (
@@ -87,7 +88,7 @@ const KontaktForm = () => {
         value={plz}
         onChangeText={handlePLZChange}
       />
-      <Button title="Bestätigen"  onPress={handleSubmit}/>
+      <Button title="Bestätigen" onPress={handleSubmit} />
     </View>
   );
 };
