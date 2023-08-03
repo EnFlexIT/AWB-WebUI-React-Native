@@ -31,7 +31,7 @@ const KontaktForm = () => {
     setPLZ(text);
   };
 
-  const handleSubmit = async () => {
+  /*const handleSubmit = async () => {
     const formData = {
       Name: name,
       Vorname: vorname,
@@ -54,7 +54,7 @@ const KontaktForm = () => {
       .catch((error) => {
         console.log('Fehler beim Übermitteln der Daten:', error);
       });
-  };
+  }; */
 
   return (
     <View style={styles.container}>

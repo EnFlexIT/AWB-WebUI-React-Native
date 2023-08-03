@@ -1,8 +1,16 @@
 # Steps um react Native in VS Code zu beutzen:
 
-- Node.js installieren.
-  > - **Optional:** Npm install –global expo-cli <br>
-  >   Dadurch ist expo Command Line interface global verfügbar.
+- [Visual Studio Code](https://code.visualstudio.com) installieren.
+- [Node.js](https://nodejs.org/de) installieren.
+  > Node.js ist eine Laufzeitumgebung, die alles enthält, was man zur Ausführung eines in JavaScript geschriebenen Programms benötigt. <br>
+  > Zusätzlich benötigt man es um NPM Befehle durchzuführen. <br>
+  > Unter NPM (Node Package Manager) versteht man ein Paketmanager für node. js. Mit NPM lassen sich unter anderem Software-Pakete für die Entwicklung von Webprojekten verwalten und steuern.
+
+Folgenden Befehl im Windows CMD oder in VS Code Terminal eingeben:
+
+- Npm install –global expo-cli <br>
+  > Dadurch ist expo Command Line interface global verfügbar und man braucht es um React Native Apps mit Expo zu starten oder zu erstellen. <br>
+  > Expo ist eine Open-Source-Plattform für die Entwicklung universeller nativer Apps für Android, iOS und das Web mit JavaScript und React.
 
 # Um development server zu starten:
 

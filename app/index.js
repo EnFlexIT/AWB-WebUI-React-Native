@@ -32,6 +32,7 @@ export default function Page() {
     api.infoGet(display);
   }, []);
 
+  //Session ID wird hier Client seitig erstellt und im Local Storage abgespeichert
   const getSessionId = async () => {
     try {
       // Versuche die Sitzungs-ID aus dem Speicher zu laden

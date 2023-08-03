@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Image, Text, StyleSheet } from 'react-native';
 import { useRouter } from "expo-router"
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 
 const testApicall = () => {
@@ -16,8 +17,27 @@ const testApicall = () => {
 
     useEffect(() => {
         load();
+        getSessionId();
     }, []);
 
+
+    //Session ID wird vom Server empfangen und in Local storage abgespeichert
+    const getSessionId = async () => {
+        try {
+            //Sendet Get Anfrage
+            const response = await axios.get('http://localhost:8080/api/start');
+            // Extrahieren Sie die Sitzungs-ID aus der Antwort des Servers.
+            const sessionId = response.data.sessionId;
+            //Speichert Session ID in Local Storage
+            await AsyncStorage.setItem('session_id', sessionId);
+            console.log(`Sitzungs-ID vom Server gespeichert: ${sessionId}`);
+        } catch (error) {
+            console.log('Fehler beim Abrufen der Sitzungs-ID', error);
+        }
+    };
+
+
+    //Läd Username aus Local Storage
     const load = async () => {
         try {
             let name = await AsyncStorage.getItem('Username')

@@ -14,7 +14,7 @@ const LoginForm = () => {
 
   const router = useRouter();
 
-
+  //Eingabe wird erfasst
   const handleUsernameChange = (text) => {
     setUsername(text);
   };
@@ -23,6 +23,7 @@ const LoginForm = () => {
     setPassword(text);
   };
 
+  //Username wird in Local Storage abgespeichert
   const storeData = async () => {
     try {
       await AsyncStorage.setItem('Username', username);
@@ -33,11 +34,11 @@ const LoginForm = () => {
   };
 
   const handleLogin = () => {
-
-
+    //Username uns Passwort werden aus Local Storage entnommen
     const storedUsername = sessionStorage.getItem('username')
     const storedPassword = sessionStorage.getItem('password')
 
+    //EIngabe wird mit gespeicherten Daten abgeglichen
     if (username === storedUsername && password === storedPassword) {
       storeData();
       console.log('Erfolgreich eingeloggt');
