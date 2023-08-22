@@ -7720,6 +7720,11 @@ react-native-gradle-plugin@^0.71.15:
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.18.tgz#20ef199bc85be32e45bb6cc069ec2e7dcb1a74a6"
   integrity sha512-7F6bD7B8Xsn3JllxcwHhFcsl9aHIig47+3eN4IHFNqfLhZr++3ElDrcqfMzugM+niWbaMi7bJ0kAkAL8eCpdWg==
 
+react-native-mqtt@^0.1.0-beta4:
+  version "0.1.0-beta4"
+  resolved "https://registry.yarnpkg.com/react-native-mqtt/-/react-native-mqtt-0.1.0-beta4.tgz#b96e17745fe31ae21abe2553cbbd8bee70fd5110"
+  integrity sha512-QRm0hTfxgEKfd0BIJ9heIEgqdeWnfZMdsWRKSKWvBl/9crikSwhXFc8FTrsTqeitPyHxIpuSHbBELbBXcm+ipg==
+
 react-native-reanimated@~2.14.4:
   version "2.14.4"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.14.4.tgz#3fa3da4e7b99f5dfb28f86bcf24d9d1024d38836"
